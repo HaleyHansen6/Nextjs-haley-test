@@ -8,6 +8,10 @@ RUN npm install
 
 COPY . .
 
+# Build the Next.js app
+RUN yarn build
+
 EXPOSE 3000
 
-CMD npm run dev
+# Run the Next.js app in production mode
+CMD npm run start
