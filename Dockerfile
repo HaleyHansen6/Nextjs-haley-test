@@ -13,11 +13,8 @@ RUN yarn install --frozen-lockfile --production
 # Copy the rest of the application code
 COPY . .
 
-# Build the Next.js application
-RUN yarn build
-
 # Expose port 3000 to the outside world
 EXPOSE 3000
 
 # Command to run the application
-CMD ["yarn", "start"]
+CMD yarn dev
