@@ -1,17 +1,23 @@
+# Use the official Node.js image as the base image
 FROM node:18-alpine
 
-WORKDIR /frontend
+# Set the working directory inside the container
+WORKDIR /app
 
-COPY package*.json ./
+# Copy package.json and yarn.lock (if available) to the working directory
+COPY package.json yarn.lock ./
 
-RUN npm install
+# Install dependencies using Yarn
+RUN yarn install --frozen-lockfile --production
 
+# Copy the rest of the application code
 COPY . .
 
-# Build the Next.js app
+# Build the Next.js application
 RUN yarn build
 
+# Expose port 3000 to the outside world
 EXPOSE 3000
 
-# Run the Next.js app in production mode
-CMD npm run start
+# Command to run the application
+CMD ["yarn", "start"]
